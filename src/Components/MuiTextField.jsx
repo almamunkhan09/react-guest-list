@@ -23,6 +23,13 @@ export default function MuiTextField() {
     }
   };
 
+  const handleSubmit = async () => {
+    await createAGuest(baseUrl, guest);
+    setGuest(defaultGuest);
+  };
+
+  //
+
   return (
     <Stack spacing={4}>
       <Stack direction="row" spacing={2}>
@@ -59,7 +66,7 @@ export default function MuiTextField() {
       </Stack>
       <Button
         spacing={4}
-        onClick={() => {}}
+        onClick={handleSubmit}
         variant="contained"
         endIcon={<PersonAddIcon />}
       >
