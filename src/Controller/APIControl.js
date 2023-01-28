@@ -38,10 +38,3 @@ export {
   getASingleGuest,
   updateAGuest,
 };
-
-// console.log(
-//   await createAGuest('http://localhost:4000/guests/', {
-//     firstName: 'Al Mamun ',
-//     lastName: 'Khan',
-//   }),
-// );
