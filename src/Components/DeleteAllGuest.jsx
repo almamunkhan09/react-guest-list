@@ -27,14 +27,15 @@ export default function DealeAllGuest() {
   };
 
   return (
-    <Stack spacing={4} mt={4}>
+    <Stack spacing={4} mt={2}>
       <Button
         onClick={deleteAll}
         variant="contained"
         size="large"
         endIcon={<ClearAllIcon fontSize="large" />}
+        color="error"
       >
-        Delete All Guest
+        Delete All
       </Button>
     </Stack>
   );
