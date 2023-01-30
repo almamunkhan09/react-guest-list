@@ -1,31 +1,20 @@
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import { Button, Stack } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { deleteAGuest, getAllGuest } from '../Controller/APIControl';
+import { deleteAGuest } from '../Controller/APIControl';
 
-export default function DealeAllGuest() {
+export default function DealeAllGuest({ guestList, anyChange }) {
   const baseUrl = 'http://localhost:4000/guests/';
-  const [guestList, setGuestList] = useState([]);
-  const [anyDelete, setAnyDelete] = useState(false);
-
-  useEffect(() => {
-    getAllGuest(baseUrl)
-      .then((res) => setGuestList(res))
-      .catch((err) => err);
-  }, [anyDelete]);
 
   const deleteAll = () => {
-    console.log(guestList);
-    if (!anyDelete && guestList.length) {
+    if (guestList.length) {
       guestList.map(
         async (singleGuest) => await deleteAGuest(baseUrl, singleGuest.id),
       );
-      setAnyDelete(true);
     }
-    setGuestList([]);
-    setAnyDelete(false);
+    anyChange((prevValue) => (prevValue === 0 ? 1 : 0));
   };
 
+  if (!guestList.length > 0) return '';
   return (
     <Stack spacing={4} mt={2}>
       <Button

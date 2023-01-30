@@ -11,8 +11,8 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { getAllGuest } from '../Controller/APIControl';
+import { useState } from 'react';
+import { deleteAGuest, updateAGuest } from '../Controller/APIControl';
 
 const baseUrl = 'http://localhost:4000/guests/';
 
@@ -37,20 +37,24 @@ const baseUrl = 'http://localhost:4000/guests/';
 //   },
 // ];
 
-export default function ShowGuests() {
-  const [guestList, setGuestList] = useState([]);
-  const [acceptInvitation, setAcceptInvitation] = useState(false);
-  useEffect(() => {
-    getAllGuest(baseUrl)
-      .then((res) => setGuestList(res))
-      .catch((err) => err);
-  }, []);
+export default function ShowGuests({ guestList, anyChange }) {
+  // const [guestList, setGuestList] = useState([]);
 
-  console.log(acceptInvitation);
-  const handleCheckBox = (event) => {
-    console.log(event);
-    // const previous
-    setAcceptInvitation(event.target.checked);
+  // useEffect(() => {
+  //   getAllGuest(baseUrl)
+  //     .then((res) => setGuestList(res))
+  //     .catch((err) => err);
+  // }, []);
+
+  // const handleCheckBox = (event, id) => {
+  //   console.log(id);
+  //   // const previous
+  //   setAcceptInvitation(event.target.checked);
+  // };
+
+  const handleDelete = async (id) => {
+    await deleteAGuest(baseUrl, id);
+    anyChange((prevValue) => (prevValue === 0 ? 1 : 0));
   };
 
   if (guestList.length === 0) return '';
@@ -78,14 +82,27 @@ export default function ShowGuests() {
                 value={guest.id}
                 edge="start"
                 aria-label="mamun"
-                onChange={handleCheckBox}
-                // checked={guest.attending}
-                tabIndex={guest.id}
+                // onChange={(event) => {
+                //   console.log(guest.id);
+                // }}
+                checked={guest.attending}
+                // tabIndex={guest.id}
                 disableRipple
+                onClick={async (event) => {
+                  await updateAGuest(baseUrl, guest.id, {
+                    attending: event.target.checked,
+                  });
+                  anyChange((prevValue) => (prevValue === 0 ? 1 : 0));
+                }}
                 inputProps={{ 'aria-labelledby': 'khan' }}
               />
               <ListItemText primary={` ${guest.firstName} ${guest.lastName}`} />
-              <Button variant="contained" color="error" size="small">
+              <Button
+                onClick={() => handleDelete(guest.id)}
+                variant="contained"
+                color="error"
+                size="small"
+              >
                 {' '}
                 Remove
               </Button>

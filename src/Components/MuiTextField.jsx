@@ -7,7 +7,7 @@ import { createAGuest } from '../Controller/APIControl';
 // It takes two input. A url and and a object of userInformation. It creates an user in the server with id,firstName and lastName
 // and also with attending as false
 
-export default function MuiTextField() {
+export default function MuiTextField({ anyChange }) {
   const baseUrl = 'http://localhost:4000/guests/';
   const defaultGuest = {
     firstName: '',
@@ -20,11 +20,13 @@ export default function MuiTextField() {
     if (event.key === 'Enter') {
       await createAGuest(baseUrl, guest);
       setGuest(defaultGuest);
+      anyChange((prevValue) => (prevValue === 0 ? 1 : 0));
     }
   };
 
   const handleSubmit = async () => {
     await createAGuest(baseUrl, guest);
+    anyChange((prevValue) => (prevValue === 0 ? 1 : 0));
     setGuest(defaultGuest);
   };
 
