@@ -58,19 +58,17 @@ export default function ShowGuests({ guestList, anyChange, baseUrl }) {
   if (guestList.length === 0) return '';
 
   return (
-    <Stack
-      data-test-id="guest"
-      mt={4}
-      bgcolor="#b2dfdb"
-      spacing={1}
-      borderRadius={2}
-    >
-      <Typography variant="h4"> Guests</Typography>
-      <Divider />
-      <List data-test-id="guest">
+    <Stack mt={4} bgcolor="#b2dfdb" spacing={1} borderRadius={2}>
+      <Stack>
+        <Typography variant="h4"> Guests</Typography>
+        <Divider />
+      </Stack>
+
+      <List>
         {guestList.map((guest) => {
           return (
             <ListItem
+              data-test-id="guest"
               key={guest.id}
               secondaryAction={
                 <IconButton edge="end">
