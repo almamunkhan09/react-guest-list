@@ -14,8 +14,6 @@ import {
 import { useState } from 'react';
 import { deleteAGuest, updateAGuest } from '../Controller/APIControl';
 
-const baseUrl = 'http://localhost:4000/guests/';
-
 // const guestList = [
 //   {
 //     id: '8',
@@ -37,7 +35,7 @@ const baseUrl = 'http://localhost:4000/guests/';
 //   },
 // ];
 
-export default function ShowGuests({ guestList, anyChange }) {
+export default function ShowGuests({ guestList, anyChange, baseUrl }) {
   // const [guestList, setGuestList] = useState([]);
 
   // useEffect(() => {
@@ -63,7 +61,7 @@ export default function ShowGuests({ guestList, anyChange }) {
     <Stack mt={4} bgcolor="#b2dfdb" spacing={1} borderRadius={2}>
       <Typography variant="h4"> Guests</Typography>
       <Divider />
-      <List>
+      <List data-test-id="guest">
         {guestList.map((guest) => {
           return (
             <ListItem
@@ -81,7 +79,7 @@ export default function ShowGuests({ guestList, anyChange }) {
               <Checkbox
                 value={guest.id}
                 edge="start"
-                aria-label="mamun"
+                aria-label="attending "
                 // onChange={(event) => {
                 //   console.log(guest.id);
                 // }}
@@ -94,7 +92,7 @@ export default function ShowGuests({ guestList, anyChange }) {
                   });
                   anyChange((prevValue) => (prevValue === 0 ? 1 : 0));
                 }}
-                inputProps={{ 'aria-labelledby': 'khan' }}
+                inputProps={{ 'aria-labelledby': 'attending status' }}
               />
               <ListItemText primary={` ${guest.firstName} ${guest.lastName}`} />
               <Button
@@ -102,6 +100,7 @@ export default function ShowGuests({ guestList, anyChange }) {
                 variant="contained"
                 color="error"
                 size="small"
+                aria-label="Remove fistname lastname"
               >
                 {' '}
                 Remove

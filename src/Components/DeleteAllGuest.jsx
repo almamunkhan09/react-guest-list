@@ -2,9 +2,7 @@ import ClearAllIcon from '@mui/icons-material/ClearAll';
 import { Button, Stack } from '@mui/material';
 import { deleteAGuest } from '../Controller/APIControl';
 
-export default function DealeAllGuest({ guestList, anyChange }) {
-  const baseUrl = 'http://localhost:4000/guests/';
-
+export default function DealeAllGuest({ guestList, anyChange, baseUrl }) {
   const deleteAll = () => {
     if (guestList.length) {
       guestList.map(
