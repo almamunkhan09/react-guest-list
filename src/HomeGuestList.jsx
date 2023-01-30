@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import DealeAllGuest from './Components/DeleteAllGuest';
 import ShowGuests from './Components/ShowGuests';
 import { getAllGuest } from './Controller/APIControl';
+import Filter from './Filter';
 import InputGuest from './InputGuest';
 
 const baseUrl =
@@ -17,6 +18,8 @@ function HomeGuestList() {
   const [guestList, setGuestList] = useState([]);
   const [backendConnect, setBackendConnect] = useState(false);
   const [isAnyChanged, setIsAnyChanged] = useState(0);
+  const [filterType, setFilterType] = useState('all');
+
   // const [dataBaseFailed, setDataBaseFailed] = useState(false);
   useEffect(() => {
     getAllGuest(baseUrl)
@@ -39,10 +42,12 @@ function HomeGuestList() {
         <Typography variant="h4"> Don't Miss A Friend </Typography>
       </Stack>
       <InputGuest anyChange={setIsAnyChanged} baseUrl={baseUrl} />
+      <Filter value={filterType} setValue={setFilterType} />
       <ShowGuests
         guestList={guestList}
         anyChange={setIsAnyChanged}
         baseUrl={baseUrl}
+        filterType={filterType}
       />
       <DealeAllGuest
         anyChange={setIsAnyChanged}

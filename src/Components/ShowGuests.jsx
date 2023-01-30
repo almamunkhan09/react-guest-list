@@ -1,3 +1,4 @@
+import EditIcon from '@mui/icons-material/Edit';
 import PendingIcon from '@mui/icons-material/Pending';
 import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
 import {
@@ -11,7 +12,6 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import { useState } from 'react';
 import { deleteAGuest, updateAGuest } from '../Controller/APIControl';
 
 // const guestList = [
@@ -35,27 +35,34 @@ import { deleteAGuest, updateAGuest } from '../Controller/APIControl';
 //   },
 // ];
 
-export default function ShowGuests({ guestList, anyChange, baseUrl }) {
-  // const [guestList, setGuestList] = useState([]);
-
-  // useEffect(() => {
-  //   getAllGuest(baseUrl)
-  //     .then((res) => setGuestList(res))
-  //     .catch((err) => err);
-  // }, []);
-
-  // const handleCheckBox = (event, id) => {
-  //   console.log(id);
-  //   // const previous
-  //   setAcceptInvitation(event.target.checked);
-  // };
+export default function ShowGuests({
+  guestList,
+  anyChange,
+  baseUrl,
+  filterType,
+}) {
+  let filteredGuestList;
+  if (filterType === 'attending') {
+    filteredGuestList = guestList.filter((guest) => guest.attending === true);
+  } else if (filterType === 'notAttending') {
+    filteredGuestList = guestList.filter((guest) => guest.attending === false);
+  } else {
+    filteredGuestList = [...guestList];
+  }
 
   const handleDelete = async (id) => {
     await deleteAGuest(baseUrl, id);
     anyChange((prevValue) => (prevValue === 0 ? 1 : 0));
   };
 
-  if (guestList.length === 0) return '';
+  if (filteredGuestList.length === 0) {
+    return (
+      <Stack mt={4} bgcolor="error" spacing={1} borderRadius={2}>
+        {' '}
+        Ops there is no guest
+      </Stack>
+    );
+  }
 
   return (
     <Stack mt={4} bgcolor="#b2dfdb" spacing={1} borderRadius={2}>
@@ -65,7 +72,7 @@ export default function ShowGuests({ guestList, anyChange, baseUrl }) {
       </Stack>
 
       <List>
-        {guestList.map((guest) => {
+        {filteredGuestList.map((guest) => {
           return (
             <ListItem
               data-test-id="guest"
@@ -105,10 +112,15 @@ export default function ShowGuests({ guestList, anyChange, baseUrl }) {
                 color="error"
                 size="small"
                 aria-label="Remove fistname lastname"
+                m={2}
               >
                 {' '}
                 Remove
               </Button>
+              <IconButton m={2} size="small">
+                {' '}
+                <EditIcon />
+              </IconButton>
             </ListItem>
           );
         })}

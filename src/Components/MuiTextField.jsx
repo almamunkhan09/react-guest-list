@@ -14,8 +14,6 @@ export default function MuiTextField({ anyChange, baseUrl }) {
     attending: false,
   };
 
-  console.log(baseUrl);
-
   const [guest, setGuest] = useState(defaultGuest);
   const handleOnKeyDown = async (event) => {
     if (event.key === 'Enter') {
