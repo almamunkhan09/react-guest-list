@@ -58,7 +58,13 @@ export default function ShowGuests({ guestList, anyChange, baseUrl }) {
   if (guestList.length === 0) return '';
 
   return (
-    <Stack mt={4} bgcolor="#b2dfdb" spacing={1} borderRadius={2}>
+    <Stack
+      data-test-id="guest"
+      mt={4}
+      bgcolor="#b2dfdb"
+      spacing={1}
+      borderRadius={2}
+    >
       <Typography variant="h4"> Guests</Typography>
       <Divider />
       <List data-test-id="guest">
