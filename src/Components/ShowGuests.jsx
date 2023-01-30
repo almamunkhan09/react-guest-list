@@ -83,7 +83,7 @@ export default function ShowGuests({ guestList, anyChange, baseUrl }) {
               <Checkbox
                 value={guest.id}
                 edge="start"
-                aria-label="attending "
+                // aria-label="attending "
                 // onChange={(event) => {
                 //   console.log(guest.id);
                 // }}
@@ -96,7 +96,7 @@ export default function ShowGuests({ guestList, anyChange, baseUrl }) {
                   });
                   anyChange((prevValue) => (prevValue === 0 ? 1 : 0));
                 }}
-                inputProps={{ 'aria-labelledby': 'attending status' }}
+                inputProps={{ 'aria-label': 'attending' }}
               />
               <ListItemText primary={` ${guest.firstName} ${guest.lastName}`} />
               <Button
