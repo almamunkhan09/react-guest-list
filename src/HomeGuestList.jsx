@@ -11,7 +11,7 @@ import { getAllGuest } from './Controller/APIControl';
 import InputGuest from './InputGuest';
 
 const baseUrl =
-  'http://7508204d-5de7-48e9-b02c-7be936f3cff0.id.repl.co/guests/';
+  'https://express-guest-list-api-memory-data-store.al-mamunmamun4.repl.co/guests/';
 
 function HomeGuestList() {
   const [guestList, setGuestList] = useState([]);
