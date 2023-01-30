@@ -1,6 +1,7 @@
 import PendingIcon from '@mui/icons-material/Pending';
 import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
 import {
+  Button,
   Checkbox,
   Divider,
   IconButton,
@@ -38,11 +39,19 @@ const baseUrl = 'http://localhost:4000/guests/';
 
 export default function ShowGuests() {
   const [guestList, setGuestList] = useState([]);
+  const [acceptInvitation, setAcceptInvitation] = useState(false);
   useEffect(() => {
     getAllGuest(baseUrl)
       .then((res) => setGuestList(res))
       .catch((err) => err);
   }, []);
+
+  console.log(acceptInvitation);
+  const handleCheckBox = (event) => {
+    console.log(event);
+    // const previous
+    setAcceptInvitation(event.target.checked);
+  };
 
   if (guestList.length === 0) return '';
 
@@ -66,13 +75,20 @@ export default function ShowGuests() {
               }
             >
               <Checkbox
+                value={guest.id}
                 edge="start"
-                // checked={checked.indexOf(value) !== -1}
-                tabIndex={-1}
+                aria-label="mamun"
+                onChange={handleCheckBox}
+                // checked={guest.attending}
+                tabIndex={guest.id}
                 disableRipple
-                // inputProps={{ 'aria-labelledby': labelId }}
+                inputProps={{ 'aria-labelledby': 'khan' }}
               />
               <ListItemText primary={` ${guest.firstName} ${guest.lastName}`} />
+              <Button variant="contained" color="error" size="small">
+                {' '}
+                Remove
+              </Button>
             </ListItem>
           );
         })}
