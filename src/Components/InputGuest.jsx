@@ -2,7 +2,6 @@
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import { Button, Stack, TextField } from '@mui/material';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
 import { createAGuest } from '../Controller/APIControl';
 
 // This component is for creating a guest inside the backend server
