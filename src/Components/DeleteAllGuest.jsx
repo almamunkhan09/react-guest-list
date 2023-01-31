@@ -2,10 +2,10 @@ import ClearAllIcon from '@mui/icons-material/ClearAll';
 import { Button, Stack } from '@mui/material';
 import { deleteAGuest } from '../Controller/APIControl';
 
-export default function DealeAllGuest({ guestList, anyChange, baseUrl }) {
-  if (!guestList.length > 0) return '';
-
-  const deleteAll = async () => {
+// Delete all function deletes all the entries inside the list
+// This api dealete only on entry at atime. So delete all is implemented by mapping through each element of a list
+export default function DeleteAllGuest({ guestList, anyChange, baseUrl }) {
+  const deleteAll = () => {
     guestList.forEach(async (element, index) => {
       if (index === guestList.length - 1) {
         await deleteAGuest(baseUrl, element.id);

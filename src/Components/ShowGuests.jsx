@@ -14,34 +14,15 @@ import {
 } from '@mui/material';
 import { deleteAGuest, updateAGuest } from '../Controller/APIControl';
 
-// const guestList = [
-//   {
-//     id: '8',
-//     firstName: 'Al Mamun ',
-//     lastName: 'Khan',
-//     attending: false,
-//   },
-//   {
-//     id: '9',
-//     firstName: 'Shayan ',
-//     lastName: 'Chowdhury',
-//     attending: false,
-//   },
-//   {
-//     id: '10',
-//     firstName: 'Majharul ',
-//     lastName: 'Islam',
-//     attending: true,
-//   },
-// ];
-
+// Show guest list function. It takes props from the Home page
 export default function ShowGuests({
   guestList,
   anyChange,
   baseUrl,
   filterType,
 }) {
-  let filteredGuestList;
+  let filteredGuestList; // Define as an array to get all the filtered guest
+  // Filter based on user choise
   if (filterType === 'attending') {
     filteredGuestList = guestList.filter((guest) => guest.attending === true);
   } else if (filterType === 'notAttending') {
@@ -50,16 +31,17 @@ export default function ShowGuests({
     filteredGuestList = [...guestList];
   }
 
+  // Function of remove button in each guest component
   const handleDelete = async (id) => {
     await deleteAGuest(baseUrl, id);
     anyChange((prevValue) => (prevValue === 0 ? 1 : 0));
   };
-
+  // If there is no filtered list then it shows an message
   if (filteredGuestList.length === 0) {
     return (
       <Stack mt={4} bgcolor="error" spacing={1} borderRadius={2}>
         {' '}
-        Ops there is no guest
+        Ops ther is no guest for this filter
       </Stack>
     );
   }
@@ -70,7 +52,6 @@ export default function ShowGuests({
         <Typography variant="h4"> Guests</Typography>
         <Divider />
       </Stack>
-
       <List>
         {filteredGuestList.map((guest) => {
           return (
@@ -90,12 +71,7 @@ export default function ShowGuests({
               <Checkbox
                 value={guest.id}
                 edge="start"
-                // aria-label="attending "
-                // onChange={(event) => {
-                //   console.log(guest.id);
-                // }}
                 checked={guest.attending}
-                // tabIndex={guest.id}
                 disableRipple
                 onClick={async (event) => {
                   await updateAGuest(baseUrl, guest.id, {

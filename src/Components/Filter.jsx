@@ -4,7 +4,11 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 
+// Implement filter option inthe app/
+// Filter options are all, attending and not attending.
+
 export default function Filter({ value, setValue }) {
+  // Filter function based on user choise
   const handleChange = (event) => {
     setValue(event.target.value);
   };
@@ -30,12 +34,6 @@ export default function Filter({ value, setValue }) {
             label="Not Attending"
           />
           <FormControlLabel value="all" control={<Radio />} label="All" />
-          {/* <FormControlLabel
-            value="disabled"
-            disabled
-            control={<Radio />}
-            label="other"
-          /> */}
         </RadioGroup>
       </FormControl>
     </Stack>
