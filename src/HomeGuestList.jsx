@@ -42,18 +42,24 @@ function HomeGuestList() {
         <Typography variant="h4"> Don't Miss A Friend </Typography>
       </Stack>
       <InputGuest anyChange={setIsAnyChanged} baseUrl={baseUrl} />
-      <Filter value={filterType} setValue={setFilterType} />
-      <ShowGuests
-        guestList={guestList}
-        anyChange={setIsAnyChanged}
-        baseUrl={baseUrl}
-        filterType={filterType}
-      />
-      <DealeAllGuest
-        anyChange={setIsAnyChanged}
-        guestList={guestList}
-        baseUrl={baseUrl}
-      />
+      {!guestList.length > 0 ? (
+        ''
+      ) : (
+        <>
+          <Filter value={filterType} setValue={setFilterType} />
+          <ShowGuests
+            guestList={guestList}
+            anyChange={setIsAnyChanged}
+            baseUrl={baseUrl}
+            filterType={filterType}
+          />
+          <DealeAllGuest
+            anyChange={setIsAnyChanged}
+            guestList={guestList}
+            baseUrl={baseUrl}
+          />
+        </>
+      )}
     </>
   );
 }
