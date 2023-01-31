@@ -1,20 +1,21 @@
+// Add packages and functions
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import { Button, Stack, TextField } from '@mui/material';
 import { useState } from 'react';
 import { createAGuest } from '../Controller/APIControl';
 
-// create a function create a single user inthe backebd server
-// It takes two input. A url and and a object of userInformation. It creates an user in the server with id,firstName and lastName
-// and also with attending as false
+// This component is for creating a guest inside the backend server
+// It takes firstName,last name and make a post Request to the server
 
-export default function MuiTextField({ anyChange, baseUrl }) {
+export default function InputGuest({ anyChange, baseUrl }) {
   const defaultGuest = {
     firstName: '',
     lastName: '',
-    attending: false,
   };
-
+  // Take a guest Instance and make request to server
   const [guest, setGuest] = useState(defaultGuest);
+
+  // Invoke the post request the user press down the enter
   const handleOnKeyDown = async (event) => {
     if (event.key === 'Enter') {
       await createAGuest(baseUrl, guest);
@@ -23,6 +24,7 @@ export default function MuiTextField({ anyChange, baseUrl }) {
     }
   };
 
+  // Also there is Add button that can add a guest in the list
   const handleSubmit = async () => {
     await createAGuest(baseUrl, guest);
     anyChange((prevValue) => (prevValue === 0 ? 1 : 0));
@@ -55,9 +57,6 @@ export default function MuiTextField({ anyChange, baseUrl }) {
           size="large"
           color="secondary"
           value={guest.lastName}
-          // onChange={(event) => {
-          //   setLastName(event.target.value);
-          // }}
           onKeyDown={handleOnKeyDown}
           onChange={(event) => {
             const { name, value } = event.target;
