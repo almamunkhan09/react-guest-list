@@ -35,44 +35,52 @@ export default function InputGuest({ anyChange, baseUrl }) {
 
   return (
     <Stack spacing={2}>
-      <Stack direction="row" spacing={2}>
-        <TextField
-          required
-          name="firstName"
-          label="First name"
-          variant="outlined"
-          size="meduim"
-          color="secondary"
-          value={guest.firstName}
-          onChange={(event) => {
-            const { name, value } = event.target;
-            setGuest({ ...guest, [name]: value });
-          }}
-        />
-        <TextField
-          required
-          label="Last name"
-          name="lastName"
-          variant="outlined"
-          size="large"
-          color="secondary"
-          value={guest.lastName}
-          onKeyDown={handleOnKeyDown}
-          onChange={(event) => {
-            const { name, value } = event.target;
-            setGuest({ ...guest, [name]: value });
-          }}
-        />
-      </Stack>
-      <Button
-        spacing={4}
-        onClick={handleSubmit}
-        variant="contained"
-        endIcon={<PersonAddIcon />}
-      >
-        {' '}
-        Add Guest
-      </Button>
+      <form action="">
+        <Stack
+          direction="row"
+          spacing={2}
+          mb={2}
+          alignItems="center"
+          justifyContent="center"
+        >
+          <TextField
+            required
+            name="firstName"
+            label="First name"
+            variant="outlined"
+            size="meduim"
+            color="secondary"
+            value={guest.firstName}
+            onChange={(event) => {
+              const { name, value } = event.target;
+              setGuest({ ...guest, [name]: value });
+            }}
+          />
+          <TextField
+            required
+            label="Last name"
+            name="lastName"
+            variant="outlined"
+            size="large"
+            color="secondary"
+            value={guest.lastName}
+            onKeyDown={handleOnKeyDown}
+            onChange={(event) => {
+              const { name, value } = event.target;
+              setGuest({ ...guest, [name]: value });
+            }}
+          />
+        </Stack>
+        <Button
+          spacing={4}
+          onClick={handleSubmit}
+          variant="contained"
+          endIcon={<PersonAddIcon />}
+        >
+          {' '}
+          Add Guest
+        </Button>
+      </form>
     </Stack>
   );
 }

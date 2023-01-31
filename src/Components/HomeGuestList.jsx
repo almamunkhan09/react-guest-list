@@ -39,7 +39,7 @@ function HomeGuestList() {
 
   return (
     <>
-      <Stack mb={5}>
+      <Stack mb={5} alignItems="center" justifyContent="center">
         <Typography variant="h1"> Athithi </Typography>
         <Typography variant="h4"> Don't Miss A Friend </Typography>
       </Stack>
