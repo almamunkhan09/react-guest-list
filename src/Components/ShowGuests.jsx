@@ -93,10 +93,10 @@ export default function ShowGuests({
                 {' '}
                 Remove
               </Button>
-              <IconButton m={2} size="small">
+              {/* <IconButton m={2} size="small">
                 {' '}
                 <EditIcon />
-              </IconButton>
+              </IconButton> */}
             </ListItem>
           );
         })}
