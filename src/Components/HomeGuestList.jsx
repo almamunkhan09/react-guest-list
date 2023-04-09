@@ -16,7 +16,7 @@ import ShowGuests from './ShowGuests';
 
 // Base url of API after deploying in replit
 const baseUrl =
-  'https://express-guest-list-api-memory-data-store.al-mamunmamun4.repl.co/guests/';
+  'https://us-central1-guestlist-50279.cloudfunctions.net/expressApp/guests/';
 
 function HomeGuestList() {
   const [guestList, setGuestList] = useState([]);
