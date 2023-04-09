@@ -45,6 +45,7 @@ export default function InputGuest({ anyChange, baseUrl }) {
         >
           <TextField
             required
+            helperText="First Name is mentdatory"
             name="firstName"
             label="First name"
             variant="outlined"
@@ -58,6 +59,7 @@ export default function InputGuest({ anyChange, baseUrl }) {
           />
           <TextField
             required
+            helperText="Last Name is mentdatory"
             label="Last name"
             name="lastName"
             variant="outlined"
